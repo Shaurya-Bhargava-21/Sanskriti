@@ -1,4 +1,3 @@
-// components/ContactForm.jsx
 import { useState } from 'react';
 
 function ContactForm() {
@@ -18,12 +17,6 @@ function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Create WhatsApp message with form data
-    const phoneNumber = '919760674343'; // Replace with your WhatsApp number
-    const message = `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
     // Reset form
     setFormData({
       name: '',
@@ -35,41 +28,19 @@ function ContactForm() {
   return (
     <section className="contact" id="contact">
       <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            value={formData.name}
-            onChange={handleChange}
-            required 
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            value={formData.email}
-            onChange={handleChange}
-            required 
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="message">Message</label>
-          <textarea 
-            id="message" 
-            name="message" 
-            value={formData.message}
-            onChange={handleChange}
-            required
-          ></textarea>
-        </div>
-        <button type="submit" className="submit-btn">Send Message</button>
-      </form>
+      <div className="contact-form-container">
+        <iframe
+          src="https://docs.google.com/forms/d/e/1FAIpQLSfIWTbvrS6Uc5e9tiNWQdWRlxdNksasXluYNFMopEi3836UUw/viewform?embedded=true"
+          width="100%" // Full width of the container
+          height="600" // Adjust height as needed
+          frameBorder="0"
+          marginHeight="0"
+          marginWidth="0"
+          title="Contact Form"
+        >
+          Loading…
+        </iframe>
+      </div>
     </section>
   );
 }
