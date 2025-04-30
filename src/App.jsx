@@ -1,3 +1,4 @@
+// Updated App.jsx
 import { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
@@ -5,6 +6,9 @@ import Hero from './components/Hero';
 import Products from './components/Products';
 import Footer from './components/Footer';
 import ContactForm from './components/Contactform';
+import CartPage from './components/CartPage';
+import CartSidebar from './components/CartSidebar';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   // Sample product data
@@ -28,26 +32,30 @@ function App() {
     : products.filter(product => product.category === activeCategory);
 
   return (
-    <div className="app">
-      <Header />
-      <Hero />
-      <div className="container">
-        <div className="category-filters">
-          {categories.map(category => (
-            <button 
-              key={category}
-              className={activeCategory === category ? 'active' : ''}
-              onClick={() => setActiveCategory(category)}
-            >
-              {category}
-            </button>
-          ))}
+    <CartProvider>
+      <div className="app">
+        <Header />
+        <CartSidebar />
+        <Hero />
+        <div className="container">
+          <div className="category-filters">
+            {categories.map(category => (
+              <button 
+                key={category}
+                className={activeCategory === category ? 'active' : ''}
+                onClick={() => setActiveCategory(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+          <Products products={filteredProducts} />
+        
+          <ContactForm />
         </div>
-        <Products products={filteredProducts} />
-        <ContactForm />
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </CartProvider>
   );
 }
 
