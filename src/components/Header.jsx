@@ -1,11 +1,13 @@
 // Updated components/Header.jsx
 import { useState, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import CartIcon from './CartIcon';
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { cartOpen } = useContext(CartContext);
+  const { cartOpen, setCartOpen } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(prevState => !prevState);
@@ -15,13 +17,15 @@ function Header() {
     <header className="header">
       <div className="container">
         <div className="logo">
-          <h1>Sanskriti</h1>
+          <Link to="/">
+            <h1>Sanskriti</h1>
+          </Link>
         </div>
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#products">Products</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+            <li><a href="/#products" onClick={() => setIsMenuOpen(false)}>Products</a></li>
+            <li><a href="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
           </ul>
         </nav>
         <div className="header-right">
