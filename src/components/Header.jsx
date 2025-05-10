@@ -23,7 +23,11 @@ function Header() {
         </div>
         <nav className={`nav ${isMenuOpen ? 'open' : ''}`}>
           <ul>
-            <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
+            <li><Link to="/" onClick={() => {
+              setIsMenuOpen(false);
+              navigate('/', { replace: true });
+              window.scrollTo(0, 0);
+            }}>Home</Link></li>
             <li><a href="/#products" onClick={() => setIsMenuOpen(false)}>Products</a></li>
             <li><a href="/#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
           </ul>
